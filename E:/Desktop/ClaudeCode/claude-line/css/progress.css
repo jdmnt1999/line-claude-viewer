@@ -1,0 +1,128 @@
+/* プログレスバー用のスタイル */
+.progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: var(--line-green);
+    width: 0%;
+    transition: width 0.3s ease;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.progress-status {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.progress-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.progress-controls button {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: var(--line-green);
+    color: white;
+}
+
+.progress-controls button.cancel-btn {
+    background-color: #f44336;
+}
+
+.progress-controls button:hover {
+    opacity: 0.8;
+}
+
+.progress-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ダークモード対応 */
+body.dark-theme .progress-container {
+    background-color: #333;
+}
+
+body.dark-theme .progress-bar {
+    background-color: var(--line-light-green);
+}
+
+body.dark-theme .progress-info,
+body.dark-theme .progress-status {
+    color: var(--line-text-dark);
+}
+
+/* プログレスアニメーション */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.progress-status.processing {
+    animation: pulse 1.5s infinite;
+}
+
+/* オプション選択用のスタイル */
+.import-options {
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid var(--line-border-light);
+    border-radius: 5px;
+}
+
+body.dark-theme .import-options {
+    border-color: var(--line-border-dark);
+}
+
+.import-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.import-option input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.import-option-label {
+    font-size: 14px;
+}
+
+.import-option-description {
+    font-size: 12px;
+    color: #777;
+    margin-left: 25px;
+}
+
+body.dark-theme .import-option-description {
+    color: #aaa;
+}
