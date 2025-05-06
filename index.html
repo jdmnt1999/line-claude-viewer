@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE Claude Viewer</title>
+    <link rel="stylesheet" href="css/line-theme.css">
+    <link rel="stylesheet" href="css/logo.css">
+    <link rel="stylesheet" href="css/manual-load.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <div class="logo">C</div>
+                <h1>LINE Claude Viewer</h1>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="moon-icon">🌙</span>
+                </button>
+                <button class="search-button" id="searchButton">
+                    <span class="search-icon">🔍</span>
+                </button>
+                <button class="settings-button" id="settingsButton">
+                    <span class="settings-icon">⚙️</span>
+                </button>
+            </div>
+        </header>
+        
+        <div class="sidebar">
+            <div class="search-container">
+                <input type="search" id="searchInput" placeholder="Search conversations...">
+            </div>
+            
+            <div class="conversations-list" id="conversationsList">
+                <!-- 会話リストがここに表示されます -->
+            </div>
+            
+            <div class="categories">
+                <h3>Development</h3>
+                <button class="new-development-btn" id="newDevelopmentBtn">
+                    <span class="code-icon">&#60;/&#62;</span> New Development Request
+                </button>
+                <div class="projects-list" id="projectsList">
+                    <p class="no-projects">No active projects</p>
+                </div>
+            </div>
+            
+            <div class="api-integration">
+                <h3>API Integration</h3>
+                <div class="api-key-section">
+                    <h4>API Key</h4>
+                    <div class="api-key-input-container">
+                        <input type="password" id="apiKeyInput" class="api-key-input" value="••••••••••••••••••••••••">
+                        <button class="toggle-visibility-btn" id="toggleApiKeyBtn">
+                            <span class="eye-icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="model-selection">
+                    <h4>Model</h4>
+                    <select id="modelSelect" class="model-dropdown">
+                        <option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option>
+                        <option value="claude-3-opus">Claude 3 Opus</option>
+                        <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                        <option value="claude-3.5-haiku">Claude 3.5 Haiku</option>
+                    </select>
+                </div>
+                
+                <button class="save-settings-btn" id="saveSettingsBtn">
+                    <span class="save-icon">💾</span> Save Settings
+                </button>
+            </div>
+        </div>
+        
+        <main class="main-content">
+            <div class="welcome-container" id="welcomeContainer">
+                <h2>Welcome to LINE Claude Viewer</h2>
+                <p>Load a conversation to view messages, or connect to the Claude API to start a new conversation.</p>
+                <div class="action-buttons">
+                    <button class="load-conversation-btn" id="loadConversationBtn">
+                        <span class="load-icon">📂</span> Load Conversation
+                    </button>
+                    <button class="connect-api-btn" id="connectApiBtn">
+                        <span class="connect-icon">🔗</span> Connect to API
+                    </button>
+                </div>
+            </div>
+            
+            <div class="conversation-container" id="conversationContainer" style="display: none;">
+                <div class="messages-container" id="messagesContainer">
+                    <!-- メッセージがここに表示されます -->
+                </div>
+                
+                <div class="input-container">
+                    <textarea id="messageInput" placeholder="Type a message..."></textarea>
+                    <button id="sendMessageBtn">Send</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScriptファイルの読み込み -->
+    <script src="js/api.js"></script>
+    <script src="js/db-storage.js"></script>
+    <script src="js/db-fix.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/conversation-controller.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/claude-line-filter.js"></script>
+    <script src="js/cors-proxy.js"></script>
+    <script src="js/enhanced-conversation.js"></script>
+    <script src="js/enhanced-db-storage.js"></script>
+    <script src="js/json-loader.js"></script>
+    <script src="js/logo.js"></script>
+    <script src="js/development.js"></script>
+</body>
+</html>
