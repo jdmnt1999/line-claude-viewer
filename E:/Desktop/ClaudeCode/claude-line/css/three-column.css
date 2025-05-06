@@ -1,0 +1,43 @@
+/* 3カラムレイアウト用のスタイル */
+.app-container.three-column {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header header"
+        "left-column main-column right-column";
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-column {
+    grid-area: left-column;
+    border-right: 1px solid var(--line-border-light);
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--line-bg-light);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-theme .left-column {
+    background-color: var(--line-bg-dark);
+    border-right-color: var(--line-border-dark);
+}
+
+.main-column {
+    grid-area: main-column;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--line-bg-light);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-theme .main-column {
+    background-color: var(--line-bg-dark);
+}
+
+.right-column {
+    grid-area: right-column;
+    border
