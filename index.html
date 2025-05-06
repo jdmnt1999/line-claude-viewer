@@ -156,6 +156,9 @@
     <div class="right-column-overlay" id="rightColumnOverlay"></div>
 
     <!-- JavaScriptファイルの読み込み -->
+    <!-- メインモジュール -->
+    <script src="js/main.js"></script>
+    
     <!-- 基本モジュール -->
     <script src="js/file-helper.js"></script>
     <script src="js/api.js"></script>
@@ -209,7 +212,7 @@
                 errorContainer.style.maxHeight = '200px';
                 errorContainer.style.overflow = 'auto';
                 errorContainer.style.zIndex = '9999';
-                errorContainer.textContent = `エラー: ${event.error.message}\n場所: ${event.filename}:${event.lineno}:${event.colno}`;
+                errorContainer.textContent = `エラー: ${event.error?.message || '不明なエラー'}\n場所: ${event.filename || '不明'}:${event.lineno || '?'}:${event.colno || '?'}`;
                 
                 const closeBtn = document.createElement('button');
                 closeBtn.textContent = '×';
