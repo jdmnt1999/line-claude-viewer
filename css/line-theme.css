@@ -1,0 +1,412 @@
+/* LINE風テーマのスタイル */
+:root {
+    --line-green: #06c755;
+    --line-light-green: #00e05f;
+    --line-bg-light: #ffffff;
+    --line-bg-dark: #1e1e1e;
+    --line-text-light: #333333;
+    --line-text-dark: #f5f5f5;
+    --line-border-light: #e6e6e6;
+    --line-border-dark: #444444;
+    --line-bubble-me: #06c755;
+    --line-bubble-me-text: #ffffff;
+    --line-bubble-other: #f5f5f5;
+    --line-bubble-other-text: #333333;
+    --line-bubble-dark-other: #333333;
+    --line-bubble-dark-other-text: #f5f5f5;
+    --line-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--line-bg-light);
+    color: var(--line-text-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme {
+    background-color: var(--line-bg-dark);
+    color: var(--line-text-dark);
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--line-green);
+    color: white;
+    box-shadow: 0 2px 5px var(--line-shadow);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    color: var(--line-green);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.theme-toggle, .search-button, .settings-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    border-right: 1px solid var(--line-border-light);
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--line-bg-light);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-theme .sidebar {
+    background-color: var(--line-bg-dark);
+    border-right-color: var(--line-border-dark);
+}
+
+.search-container {
+    margin-bottom: 15px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--line-border-light);
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+body.dark-theme #searchInput {
+    background-color: var(--line-bg-dark);
+    color: var(--line-text-dark);
+    border-color: var(--line-border-dark);
+}
+
+#searchInput:focus {
+    border-color: var(--line-green);
+}
+
+.conversations-list {
+    margin-bottom: 20px;
+}
+
+.conversation-item {
+    padding: 10px;
+    border-bottom: 1px solid var(--line-border-light);
+    cursor: pointer;
+}
+
+body.dark-theme .conversation-item {
+    border-bottom-color: var(--line-border-dark);
+}
+
+.conversation-item:hover {
+    background-color: rgba(6, 199, 85, 0.1);
+}
+
+.conversation-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.conversation-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #999;
+}
+
+.categories h3, .api-integration h3 {
+    margin-top: 20px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line-border-light);
+    padding-bottom: 8px;
+}
+
+body.dark-theme .categories h3, 
+body.dark-theme .api-integration h3 {
+    border-bottom-color: var(--line-border-dark);
+}
+
+.new-development-btn {
+    background-color: var(--line-green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.code-icon {
+    margin-right: 5px;
+}
+
+.no-projects {
+    text-align: center;
+    color: #999;
+    padding: 10px;
+}
+
+.api-key-section, .model-selection {
+    margin-bottom: 15px;
+}
+
+.api-key-section h4, .model-selection h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.api-key-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--line-border-light);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+body.dark-theme .api-key-input-container {
+    border-color: var(--line-border-dark);
+}
+
+.api-key-input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+.toggle-visibility-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: inherit;
+}
+
+.model-dropdown {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--line-border-light);
+    border-radius: 5px;
+    background-color: var(--line-bg-light);
+    color: var(--line-text-light);
+    outline: none;
+}
+
+body.dark-theme .model-dropdown {
+    background-color: var(--line-bg-dark);
+    color: var(--line-text-dark);
+    border-color: var(--line-border-dark);
+}
+
+.save-settings-btn {
+    background-color: var(--line-green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.save-icon {
+    margin-right: 5px;
+}
+
+.main-content {
+    grid-area: main;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--line-bg-light);
+    transition: background-color 0.3s ease;
+}
+
+body.dark-theme .main-content {
+    background-color: var(--line-bg-dark);
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.welcome-container h2 {
+    margin-bottom: 15px;
+    color: var(--line-green);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.load-conversation-btn, .connect-api-btn {
+    background-color: var(--line-green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.load-icon, .connect-icon {
+    margin-right: 8px;
+}
+
+.conversation-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.messages-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    word-break: break-word;
+}
+
+.message.from-me {
+    background-color: var(--line-bubble-me);
+    color: var(--line-bubble-me-text);
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.message.from-other {
+    background-color: var(--line-bubble-other);
+    color: var(--line-bubble-other-text);
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+body.dark-theme .message.from-other {
+    background-color: var(--line-bubble-dark-other);
+    color: var(--line-bubble-dark-other-text);
+}
+
+.message-timestamp {
+    font-size: 10px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.input-container {
+    display: flex;
+    margin-top: 15px;
+    border-top: 1px solid var(--line-border-light);
+    padding-top: 15px;
+}
+
+body.dark-theme .input-container {
+    border-top-color: var(--line-border-dark);
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--line-border-light);
+    border-radius: 20px;
+    margin-right: 10px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    background-color: var(--line-bg-light);
+    color: var(--line-text-light);
+    transition: border-color 0.3s ease;
+}
+
+body.dark-theme #messageInput {
+    background-color: var(--line-bg-dark);
+    color: var(--line-text-dark);
+    border-color: var(--line-border-dark);
+}
+
+#messageInput:focus {
+    border-color: var(--line-green);
+}
+
+#sendMessageBtn {
+    background-color: var(--line-green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#sendMessageBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
