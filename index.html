@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="css/logo.css">
     <link rel="stylesheet" href="css/manual-load.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/three-column.css">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container three-column">
         <header class="app-header">
             <div class="logo-container">
                 <div class="logo">C</div>
                 <h1>LINE Claude Viewer</h1>
             </div>
             <div class="header-actions">
+                <button class="toggle-left-column-btn" id="toggleLeftColumnBtn">
+                    <span class="menu-icon">☰</span>
+                </button>
                 <button class="theme-toggle" id="themeToggle">
                     <span class="moon-icon">🌙</span>
                 </button>
@@ -26,10 +30,14 @@
                 <button class="settings-button" id="settingsButton">
                     <span class="settings-icon">⚙️</span>
                 </button>
+                <button class="toggle-right-column-btn" id="toggleRightColumnBtn">
+                    <span class="menu-icon">≡</span>
+                </button>
             </div>
         </header>
         
-        <div class="sidebar">
+        <!-- 左カラム: 会話リスト -->
+        <div class="left-column">
             <div class="search-container">
                 <input type="search" id="searchInput" placeholder="Search conversations...">
             </div>
@@ -47,36 +55,10 @@
                     <p class="no-projects">No active projects</p>
                 </div>
             </div>
-            
-            <div class="api-integration">
-                <h3>API Integration</h3>
-                <div class="api-key-section">
-                    <h4>API Key</h4>
-                    <div class="api-key-input-container">
-                        <input type="password" id="apiKeyInput" class="api-key-input" value="••••••••••••••••••••••••">
-                        <button class="toggle-visibility-btn" id="toggleApiKeyBtn">
-                            <span class="eye-icon">👁️</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="model-selection">
-                    <h4>Model</h4>
-                    <select id="modelSelect" class="model-dropdown">
-                        <option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option>
-                        <option value="claude-3-opus">Claude 3 Opus</option>
-                        <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
-                        <option value="claude-3.5-haiku">Claude 3.5 Haiku</option>
-                    </select>
-                </div>
-                
-                <button class="save-settings-btn" id="saveSettingsBtn">
-                    <span class="save-icon">💾</span> Save Settings
-                </button>
-            </div>
         </div>
         
-        <main class="main-content">
+        <!-- 中央カラム: メインコンテンツ -->
+        <div class="main-column">
             <div class="welcome-container" id="welcomeContainer">
                 <h2>Welcome to LINE Claude Viewer</h2>
                 <p>Load a conversation to view messages, or connect to the Claude API to start a new conversation.</p>
@@ -100,8 +82,76 @@
                     <button id="sendMessageBtn">Send</button>
                 </div>
             </div>
-        </main>
+        </div>
+        
+        <!-- 右カラム: 会話詳細と設定 -->
+        <div class="right-column">
+            <!-- 会話詳細セクション -->
+            <div class="conversation-details">
+                <h3>Conversation Details</h3>
+                <div class="detail-item">
+                    <div class="detail-label">Title</div>
+                    <div class="detail-value" id="conversationTitle">-</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Created</div>
+                    <div class="detail-value" id="conversationCreated">-</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Last Updated</div>
+                    <div class="detail-value" id="conversationUpdated">-</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Message Count</div>
+                    <div class="detail-value" id="messageCount">-</div>
+                </div>
+            </div>
+            
+            <!-- API設定セクション -->
+            <div class="settings-section">
+                <h3>API Integration</h3>
+                <div class="setting-item api-key-section">
+                    <div class="setting-label">API Key</div>
+                    <div class="api-key-input-container">
+                        <input type="password" id="apiKeyInput" class="api-key-input" value="••••••••••••••••••••••••">
+                        <button class="toggle-visibility-btn" id="toggleApiKeyBtn">
+                            <span class="eye-icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="setting-item model-selection">
+                    <div class="setting-label">Model</div>
+                    <select id="modelSelect" class="model-dropdown">
+                        <option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option>
+                        <option value="claude-3-opus">Claude 3 Opus</option>
+                        <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                        <option value="claude-3.5-haiku">Claude 3.5 Haiku</option>
+                    </select>
+                </div>
+                
+                <button class="save-settings-btn" id="saveSettingsBtn">
+                    <span class="save-icon">💾</span> Save Settings
+                </button>
+            </div>
+            
+            <!-- 会話アクションセクション -->
+            <div class="settings-section">
+                <h3>Conversation Actions</h3>
+                <button class="action-btn" id="exportConversationBtn">
+                    <span class="export-icon">📤</span> Export Conversation
+                </button>
+                <button class="action-btn" id="clearConversationBtn">
+                    <span class="clear-icon">🗑️</span> Clear Conversation
+                </button>
+            </div>
+        </div>
     </div>
+    
+    <!-- モバイル表示用のオーバーレイ -->
+    <div class="overlay-backdrop" id="overlayBackdrop"></div>
+    <div class="left-column-overlay" id="leftColumnOverlay"></div>
+    <div class="right-column-overlay" id="rightColumnOverlay"></div>
 
     <!-- JavaScriptファイルの読み込み -->
     <script src="js/api.js"></script>
@@ -117,5 +167,6 @@
     <script src="js/json-loader.js"></script>
     <script src="js/logo.js"></script>
     <script src="js/development.js"></script>
+    <script src="js/three-column.js"></script>
 </body>
 </html>
