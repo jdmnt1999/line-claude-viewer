@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LINE Claude Viewer</title>
+    <!-- CSS読み込み -->
     <link rel="stylesheet" href="css/line-theme.css">
     <link rel="stylesheet" href="css/logo.css">
     <link rel="stylesheet" href="css/manual-load.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/three-column.css">
+    <link rel="stylesheet" href="css/progress.css">
 </head>
 <body>
     <div class="app-container three-column">
@@ -154,6 +156,8 @@
     <div class="right-column-overlay" id="rightColumnOverlay"></div>
 
     <!-- JavaScriptファイルの読み込み -->
+    <!-- 基本モジュール -->
+    <script src="js/file-helper.js"></script>
     <script src="js/api.js"></script>
     <script src="js/db-storage.js"></script>
     <script src="js/db-fix.js"></script>
@@ -162,12 +166,76 @@
     <script src="js/search.js"></script>
     <script src="js/claude-line-filter.js"></script>
     <script src="js/cors-proxy.js"></script>
+    
+    <!-- 拡張モジュール -->
     <script src="js/enhanced-conversation.js"></script>
     <script src="js/enhanced-db-storage.js"></script>
     <script src="js/json-loader.js"></script>
     <script src="js/logo.js"></script>
     <script src="js/development.js"></script>
+    
+    <!-- 3カラムレイアウト関連 -->
     <script src="js/three-column.js"></script>
     <script src="js/ui-three-column.js"></script>
+    
+    <!-- インポート機能拡張 -->
+    <script src="js/import-helper.js"></script>
+    <script src="js/ui-import-extension.js"></script>
+
+    <!-- デバッグモード設定 -->
+    <script>
+        // URLパラメータからデバッグモードを設定
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('debug')) {
+            localStorage.setItem('debugMode', 'true');
+            console.log('デバッグモードが有効になりました');
+        }
+        
+        // エラーハンドリングを強化
+        window.addEventListener('error', function(event) {
+            console.error('グローバルエラー:', event.error);
+            
+            // デバッグモードの場合はエラーを表示
+            if (localStorage.getItem('debugMode') === 'true') {
+                const errorContainer = document.createElement('div');
+                errorContainer.style.position = 'fixed';
+                errorContainer.style.bottom = '10px';
+                errorContainer.style.right = '10px';
+                errorContainer.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
+                errorContainer.style.color = 'white';
+                errorContainer.style.padding = '10px';
+                errorContainer.style.borderRadius = '5px';
+                errorContainer.style.maxWidth = '80%';
+                errorContainer.style.maxHeight = '200px';
+                errorContainer.style.overflow = 'auto';
+                errorContainer.style.zIndex = '9999';
+                errorContainer.textContent = `エラー: ${event.error.message}\n場所: ${event.filename}:${event.lineno}:${event.colno}`;
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = '×';
+                closeBtn.style.position = 'absolute';
+                closeBtn.style.top = '5px';
+                closeBtn.style.right = '5px';
+                closeBtn.style.background = 'none';
+                closeBtn.style.border = 'none';
+                closeBtn.style.color = 'white';
+                closeBtn.style.fontSize = '16px';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(errorContainer);
+                });
+                
+                errorContainer.appendChild(closeBtn);
+                document.body.appendChild(errorContainer);
+                
+                // 10秒後に自動的に閉じる
+                setTimeout(() => {
+                    if (document.body.contains(errorContainer)) {
+                        document.body.removeChild(errorContainer);
+                    }
+                }, 10000);
+            }
+        });
+    </script>
 </body>
 </html>
